@@ -50,15 +50,12 @@ def get_git_changeset():
         'git log --pretty=format:%ct --quiet -1 HEAD',
         stdout=subprocess.PIPE, stderr=subprocess.PIPE,
         shell=True, cwd=repo_dir, universal_newlines=True,
+        check=True
     )
-    print(repo_dir)
-    print(git_log)
-    print(git_log.stdout)
-    print(git_log.stderr)
     timestamp = git_log.stdout
-    tz = datetime.timezone.utc
+    timezone = datetime.timezone.utc
     try:
-        timestamp = datetime.datetime.fromtimestamp(int(timestamp), tz=tz)
+        timestamp = datetime.datetime.fromtimestamp(int(timestamp), tz=timezone)
     except ValueError:
         return None
 
