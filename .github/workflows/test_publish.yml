@@ -32,4 +32,4 @@ jobs:
       - name: Start linter
         run: |
           python -m pip install pylint
-          pylint "--msg-template='{path}:{line:5d},{column:2d}: [ { msg_id } ] { msg } ({symbol})'" --output-format=colorized src
+          pylint "--msg-template='{path}:{line:5d},{column:2d}: [{msg_id}] {msg} ({symbol})'" --output-format=colorized src
