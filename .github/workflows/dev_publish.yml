@@ -1,0 +1,13 @@
+name: Publish .devN to TestPyPI
+
+on:
+  create
+
+jobs:
+  publish-dev:
+    if: ${{ contains(github.ref, 'refs/tags/') && contains(github.ref, '.dev') }}
+    name: Publish Python project with .devN tag
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "publish `${{ github.ref }}`"
