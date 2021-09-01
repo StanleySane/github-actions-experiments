@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo "publish `${{ github.ref }}`"
+      - run: echo "publish from `${{ github.ref }}`"
