@@ -2,9 +2,9 @@ name: Run tests and linters
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, develop ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, develop ]
 
 jobs:
   run-tests:
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ 3.9 ]
+        python-version: [ 3.8, 3.9 ]
 
     steps:
       - uses: actions/checkout@v2
@@ -35,5 +35,9 @@ jobs:
       - name: Install linter dependencies
         run: python -m pip install pylint
       - name: Start linter
+        if: ${{ matrix.python-version == '3.9' }}
         run: |
           pylint "--msg-template='{path}:{line:5d},{column:2d}: [{msg_id}] {msg} ({symbol})'" --output-format=colorized src
+      - name: Message
+        if: ${{ matrix.python-version == '3.8' }}
+        run: echo "Never start linter on 3.8"
