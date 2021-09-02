@@ -41,3 +41,14 @@ jobs:
       - name: Message
         if: ${{ matrix.python-version == '3.8' }}
         run: echo "Never start linter on 3.8"
+
+  after-tests:
+    needs: run-tests
+    name: After tests and linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Message
+        run: echo "See it only after all tests"
+      - name: Check Python
+        run: python --version
